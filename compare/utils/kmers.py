@@ -5,6 +5,7 @@ class KmerStreamer:
     def __init__(self, filename, k, hash=False):
         self.filename = filename
         self.k = k
+        self.hash = hash
 
     def stream(self):
         for sequence in load_fasta(self.filename):
