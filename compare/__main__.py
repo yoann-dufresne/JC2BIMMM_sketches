@@ -96,7 +96,7 @@ if __name__ == "__main__":
     sketches = []
     for idx, filepath in enumerate(files_to_load):
         print(f"loading {filepath}...")
-        streamer = KmerStreamer(filepath, args.k)
+        streamer = KmerStreamer(filepath, args.k, hash=args.xorshift)
         sketch = SketchType(kmer_streamer=streamer, name=path.basename(filepath))
         sketches.append(sketch)
         print(f"{idx+1}/{len(files_to_load)} files loaded.")
