@@ -73,10 +73,10 @@ Exercises:
 ## Comparing the implementations
 
 It exists many ways of measuring the time/memory usage for a given piece of software.
-Here we will focus on simple metrics that are global time and global memory using the bash time.
-By using the `/usr/bin/time -v` as prefix of your command, you will be able to measure the "Elapsed time" and the "Maximum resident set size" wich are respectivly time and memory that you want to measure.
+Here we will focus on simple metrics that are global time and global memory.
+By using the `/usr/bin/time -v` as prefix of your command, you will be able to measure the "Elapsed time" and the "Maximum resident set size" which are respectively time and memory that you want to measure.
 
-Exercice:
+Exercise:
 * Compare the time and memory usages on the same pair of fasta activating/deactivating the hash function.
 
 </details>
@@ -86,18 +86,58 @@ Exercice:
 <details>
 <summary>-- bottom-s MinHash</summary>
 
+In the bottom-s sketch we only want to keep s kmers.
+One strategy could be to load all the kmers, sort the list and only keep the s at the beginning of that list.
+Except that the list cost in memory k times the size of the input sequence.
+So it rapidly become impractical to load all the kmers.
+Here we want to only keep s kmers in memory at a time.
+
 ## First strategy - remember the max of the bottom
 
+The strategy can be: For each new kmer visited during the enumeration, compare it with the largest kmer stored in the sketch.
+If it is smaller than the maximum value of the sketch, then remove the max and add the current kmer.
+
+Exercises:
+* Implement the add_kmers of the `Smallers` sketch class.
+* On small datasets, compare the real Jaccard index with the approximate Jaccard given by this sketch implementation. What is the influence of the sketch size ?
+* Does the xorshift activation/deactivation changes the results ?
+
+<details>
+<summary>(optional) Intermediate difficulty exercises</summary>
+
+* What is the complexity of the strategy (regarding s, the size of the sketch, k, the size of the kmers and n the size of the sequence) ?
+
+</details>
+
+
+<details>
+<summary>(optional) Intermediate difficulty - second implementation using heapq</summary>
+
 ## Second strategy - order the bottom values
+
+Looking for max value can be expensive on large sketches.
+We would like to store the kmers in such a way that the largest element is always known, it can be extracted in constant time and new elements can be inserted very quickly.
+The Heap Queue is a datastructure that has exactly these properties and the heapq library from python already implement everything we need for improving our sketch.
+
+Exercises:
+* Use the heapq python library to speedup the creation of the bottom-s sketch.
+* Compare the exec time with the previous implementation.
+* Did the Jaccard index estimation changed and why ?
+
+</details>
 
 </details>
 
 # Partition MinHash
 
 <details>
-<summary>-- Parition MinHash</summary>
+<summary>-- Partition MinHash</summary>
 
 </details>
+
+
+<details>
+<summary>(Optional) For advanced programmers</summary>
 
 # HyperMinHash
 
@@ -105,4 +145,5 @@ Exercice:
 <summary>-- HyperMinHash</summary>
 
 
+</details>
 </details>
