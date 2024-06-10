@@ -1,5 +1,5 @@
 
-# First steps - Understand the code
+# First steps - Understanding the code
 
 For this practical session everything that is not directly related to the sketches is already coded.
 This repository code contains all the primitive to enumerate kmers from fasta files, to select one type of sketch for comparison and to compare sequences using Jaccard index.
