@@ -15,9 +15,9 @@ class AllKmers(Sketch):
         kmers = []
 
         # Append the kmers one by one to a temporary kmer vector
-        for kmer, rkmer in kmer_streamer.stream():
+        for kmer in kmer_streamer.stream():
             # select the minimal kmer between forward and reverse
-            kmers.append(min(kmer, rkmer))
+            kmers.append(kmer)
 
         # Group sequences kmers with the previous kmers. The frozenset remove duplicates and allow unions over sets.
         #          v This is a union operation

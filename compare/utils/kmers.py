@@ -40,4 +40,4 @@ class KmerStreamer:
             rev_letter_value = (letter_value + 2) & 0b11
             rkmer += rev_letter_value << (2 * (k - 1))
 
-            yield kmer, rkmer
+            yield min(kmer, rkmer)
