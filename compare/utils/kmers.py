@@ -1,5 +1,5 @@
 from compare.utils.loading import load_fasta
-
+from compare.utils.xorshift import xorshift64
 
 class KmerStreamer:
     def __init__(self, filename, k):
@@ -40,4 +40,4 @@ class KmerStreamer:
             rev_letter_value = (letter_value + 2) & 0b11
             rkmer += rev_letter_value << (2 * (k - 1))
 
-            yield min(kmer, rkmer)
+            yield min(xorshift64(kmer), xorshift64(rkmer))
