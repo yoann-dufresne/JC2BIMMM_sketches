@@ -1,7 +1,7 @@
 
 # First steps - Understanding the code
 <details>
-<summary>First steps</summary>
+<summary>-- first steps</summary>
 
 For this practical session everything that is not directly related to the sketches is already coded.
 This repository code contains all the primitive to enumerate kmers from fasta files, to select one type of sketch for comparison and to compare sequences using Jaccard index.
@@ -66,8 +66,43 @@ So, whatever your implementation are, at the end, all the sketch kmers must be i
 As you can see in the kmer streaming function, there is no hashing of the value.
 So, right now, this is the alphabetic encoding that is returned by the streamer.
 
-Questions:
+Exercises:
 * Can you use the xorshift64 function present in `compare/utils/xorshift.py` to hash the kmer in the streamer ?
 * Can you modify the streamer constructor in such a way that the flag `--xorshift` of the command line activate the hashing ? (without the flag the current behavior should remain).
+
+## Comparing the implementations
+
+It exists many ways of measuring the time/memory usage for a given piece of software.
+Here we will focus on simple metrics that are global time and global memory using the bash time.
+By using the `/usr/bin/time -v` as prefix of your command, you will be able to measure the "Elapsed time" and the "Maximum resident set size" wich are respectivly time and memory that you want to measure.
+
+Exercice:
+* Compare the time and memory usages on the same pair of fasta activating/deactivating the hash function.
+
+</details>
+
+# Bottom-s MinHash
+
+<details>
+<summary>-- bottom-s MinHash</summary>
+
+## First strategy - remember the max of the bottom
+
+## Second strategy - order the bottom values
+
+</details>
+
+# Partition MinHash
+
+<details>
+<summary>-- Parition MinHash</summary>
+
+</details>
+
+# HyperMinHash
+
+<details>
+<summary>-- HyperMinHash</summary>
+
 
 </details>
