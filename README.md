@@ -1,5 +1,7 @@
 
 # First steps - Understanding the code
+<details>
+<summary>First steps</summary>
 
 For this practical session everything that is not directly related to the sketches is already coded.
 This repository code contains all the primitive to enumerate kmers from fasta files, to select one type of sketch for comparison and to compare sequences using Jaccard index.
@@ -68,4 +70,4 @@ Questions:
 * Can you use the xorshift64 function present in `compare/utils/xorshift.py` to hash the kmer in the streamer ?
 * Can you modify the streamer constructor in such a way that the flag `--xorshift` of the command line activate the hashing ? (without the flag the current behavior should remain).
 
-
+</details>

@@ -1,5 +1,7 @@
 
 def xorshift64(x):
+    """ Xorshift hash function. Take paramer x, hash it and return h(x)
+    """
     # Max 64-bits uint used to disallow the integer to grow behind 64 bits.
     mask = 18446744073709551615
 
