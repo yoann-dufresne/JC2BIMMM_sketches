@@ -133,6 +133,30 @@ Exercises:
 <details>
 <summary>-- Partition MinHash</summary>
 
+In this section we will implement the partitions MinHash sketch.
+The idea behind it is to make the s valies from the sketch independant from each other such as no ordering is needed for sketch comparison.
+So, a p-sketch (partition sketch), is composed of s partitions.
+When we compute the hash value of kmer we then want to always assign it to the same partition.
+For that we can use the modulus operation.
+
+So, a full computation for a kmer contains these steps:
+* Compute the hash of a kmer
+* Get the partition index for that value
+* Compare the kmer present in that partition with the current kmer and only keep the smaller one.
+
+Exercises:
+* Implement the partition sketch
+* Is it faster or slower than the previous sketch comparison ? Is there a memory difference ?
+* Is it closer than the previous sketch from the real jaccard value ?
+
+<details>
+<summary>(optional) Intermediate difficulty exercises</summary>
+
+* What is the complexity of the strategy (regarding s, the size of the sketch, k, the size of the kmers and n the size of the sequence) ?
+
+</details>
+
+
 </details>
 
 
