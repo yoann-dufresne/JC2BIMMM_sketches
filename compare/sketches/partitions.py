@@ -2,7 +2,7 @@ from compare.sketches.sketch import Sketch
 
 
 
-class Buckets(Sketch):
+class Partitions(Sketch):
 
     def __init__(self, kmer_streamer=None, size=0, name="Unamed kmer list"):
         # Raise error on null size

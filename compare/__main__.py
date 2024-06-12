@@ -6,7 +6,7 @@ from itertools import combinations
 from compare.utils.kmers import KmerStreamer
 from compare.sketches.all_kmers import AllKmers
 from compare.sketches.smallers import Smallers
-from compare.sketches.buckets import Buckets
+from compare.sketches.partitions import Partitions
 from compare.sketches.hypermin import HyperMin
 
 
