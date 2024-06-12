@@ -6,7 +6,7 @@ class HyperMin(Sketch):
 
     def __init__(self, kmer_streamer=None, name="Unamed kmer list"):
         # Initiation of the super-class sketch
-        super().__init__(name)
+        super().__init__(size=size, name=name)
 
         # --- Complete here if needed ---
 

@@ -24,7 +24,20 @@ Viruses:
 
 Bacteria:
 
+* https://www.ncbi.nlm.nih.gov/nuccore/NZ_CP050202.1?report=fasta
+* https://www.ncbi.nlm.nih.gov/nuccore/NZ_CP050205.1?report=fasta
+* https://www.ncbi.nlm.nih.gov/nuccore/NZ_CP050201.1?report=fasta
+* https://www.ncbi.nlm.nih.gov/nuccore/NZ_CP050214.1?report=fasta
+* https://www.ncbi.nlm.nih.gov/nuccore/NZ_CP050218.1?report=fasta
+* https://www.ncbi.nlm.nih.gov/nuccore/NZ_CP050208.1?report=fasta
+* https://www.ncbi.nlm.nih.gov/nuccore/NZ_CP050211.1?report=fasta
+* https://www.ncbi.nlm.nih.gov/nuccore/NZ_VCKP01000001.1?report=fasta
+
 Eukaryotes:
+
+* https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/002/985/GCF_000002985.6_WBcel235/GCF_000002985.6_WBcel235_genomic.fna.gz
+* https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/735/GCF_000001735.4_TAIR10.1/GCF_000001735.4_TAIR10.1_genomic.fna.gz
+* https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/010/183/535/GCF_010183535.1_CRPX506/GCF_010183535.1_CRPX506_genomic.fna.gz
 
 
 The following command lines can be used for comparison.
