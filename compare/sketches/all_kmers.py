@@ -6,7 +6,7 @@ class AllKmers(Sketch):
 
     def __init__(self, kmer_streamer=None, name="Unamed kmer list"):
         # Initiation of the super-class sketch
-        super().__init__(name)
+        super().__init__(name=name)
         # Init with kmers
         if kmer_streamer is not None:
             self.add_kmers(kmer_streamer)

@@ -23,7 +23,7 @@ def parse_cmd():
 
     parser.add_argument('-k', type=int, required=True, help="kmer size.")
     parser.add_argument('-c', "--comparison-mode", choices=['pair', 'set'], default='pair', help="Exec mode can be 'pair' of 'set'. In 'pair' mode the software will compare 2 genomes in files pointed by the 2 positionnal argument of the command. In 'set' mode, all the genomes in a directory will be compared using sketches. The directory path must be the first positional argument. Default value is 'pair'.")
-    parser.add_argument('-t', '--sketch-type', choices=['all', 'smin', 'buckets', 'hyper'], default='all', help="Type of sketch to use for the comparison(s).")
+    parser.add_argument('-t', '--sketch-type', choices=['all', 'smin', 'parts', 'hyper'], default='all', help="Type of sketch to use for the comparison(s).")
     parser.add_argument('-x', '--xorshift', action='store_true', help="Activated the xorshift function to hash kmers.")
     parser.add_argument('-s', '--size', type=int, default=1024, help="Sketch size.")
     parser.add_argument('paths', nargs='+', help="path(s) to data. See mode for more details.")
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     sketch_types = {
         'all' : AllKmers,
         'smin' : Smallers,
-        'buckets' : Buckets,
+        'parts' : Partitions,
         'hyper' : HyperMin
     }
     SketchType = sketch_types[args.sketch_type]

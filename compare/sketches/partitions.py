@@ -9,7 +9,7 @@ class Partitions(Sketch):
         if type(size) is not int or size <= 0:
             raise ValueError("The sketch size must be a positive integer")
         # Initiation of the super-class sketch
-        super().__init__(name)
+        super().__init__(size=size, name=name)
 
         # --- Complete here if needed ---
 
