@@ -134,7 +134,7 @@ Exercises:
 <summary>-- Partition MinHash</summary>
 
 In this section we will implement the partitions MinHash sketch.
-The idea behind it is to make the s valies from the sketch independant from each other such as no ordering is needed for sketch comparison.
+The idea behind it is to make the s values from the sketch independent from each other such as no ordering is needed for sketch comparison.
 So, a p-sketch (partition sketch), is composed of s partitions.
 When we compute the hash value of kmer we then want to always assign it to the same partition.
 For that we can use the modulus operation.
@@ -147,7 +147,7 @@ So, a full computation for a kmer contains these steps:
 Exercises:
 * Implement the partition sketch
 * Is it faster or slower than the previous sketch comparison ? Is there a memory difference ?
-* Is it closer than the previous sketch from the real jaccard value ?
+* Is it closer than the previous sketch from the real Jaccard value ?
 
 <details>
 <summary>(optional) Intermediate difficulty exercises</summary>
@@ -167,6 +167,28 @@ Exercises:
 
 <details>
 <summary>-- HyperMinHash</summary>
+
+In the different sketches we select a certain number of hash values because they are smaller than others.
+This selection process have a direct consequence: the binary representation of the integers have a lot of lading 0s.
+It means that the information is mostly contained in the lower part of the integer and the leading bits are mostly useless.
+So, we can change the way we represent the 64-bits integer of our hash to take advantage of that property.
+As described in the course, we can encode the position of the first 1 in the integer and complete with some lower bits of the original integer (cf figure).
+For large set of kmers we can expect to encode the 64 bits hash values in 16 bits integer with a limited loss of information along the compression.
+
+![alt text](https://github.com/yoann-dufresne/JC2BIMMM_sketches/blob/main/HyperMin.png?raw=true)
+
+Python is a language where the integer have arbitrary large integer values.
+All the encoding is completely hidden under the hood of the language.
+To be able to create list of controlled size integer we need to use libraries.
+For lists of 16 bits integer we can use the array module with "unsigned short" integers: https://docs.python.org/3/library/array.html
+
+Exercises:
+* Implement the `add_kmers` of the Hypermin sketch class.
+* The set operations are not defined on the datastructure. Redefine the `jaccard` function in the class to fit with the array representation of the sketch.
+* How the results change on a sketch with the same number of hash value than the partition sketch ?
+* Same question but with the same memory usage ?
+
+* __Super-Bonus__: How can we take advantage of the partitionning technic to even save more space ? Hint: Ask Victor Levallois about his last paper :)
 
 
 </details>

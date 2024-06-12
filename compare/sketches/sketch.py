@@ -3,8 +3,9 @@ from abc import ABC, abstractmethod
 
 class Sketch(ABC):
 
-    def __init__(self, name="Unamed kmer list"):
+    def __init__(self, size=0, name="Unamed kmer list"):
         self.name = name
+        self.size = size
         self.kmers = frozenset([])
 
     @abstractmethod
