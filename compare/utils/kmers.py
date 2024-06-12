@@ -16,7 +16,15 @@ class KmerStreamer:
         k = self.k
         kmer = 0
         rkmer = 0
-        for letter in sequence[:k-1]:
+        seq_idx = 0
+        used_nucl = 0
+        while used_nucl < k-1:
+            letter = sequence[seq_idx]
+            seq_idx += 1
+            if letter == 'N':
+                continue
+            used_nucl += 1
+
             # A = 00, C = 01, T = 10, G = 11
             # Forward kmer
             kmer <<= 2
@@ -29,7 +37,11 @@ class KmerStreamer:
 
         # Stream kmers
         mask = (1 << (2 * k)) - 1
-        for letter in sequence[k-1:]:
+        for seq_idx in range(used_nucl, len(sequence)):
+            letter = sequence[seq_idx]
+            if letter == 'N':
+                continue
+
             # Forward kmer
             kmer <<= 2
             letter_value = (ord(letter) >> 1) & 0b11
