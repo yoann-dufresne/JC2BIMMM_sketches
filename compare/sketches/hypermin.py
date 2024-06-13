@@ -14,6 +14,9 @@ class HyperMin(Sketch):
         if kmer_streamer is not None:
             self.add_kmers(kmer_streamer)
 
+    def load(self, filename):
+        raise NotImplmentedError(f"Missing load method for {type(self)} class")
+
     def add_kmers(self, kmer_streamer):
         # --- Complete here if needed ---
         raise NotImplmentedError(f"Missing add_kmers method for {type(self)} class")

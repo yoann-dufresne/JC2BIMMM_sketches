@@ -88,6 +88,14 @@ if __name__ == "__main__":
     print(f"kmer size: {args.k}")
     print()
 
+    sketch_paths = {}
+    for filepath in files_to_load:
+        file_name = path.basename(filepath)
+        file_name = file_name[:file_name.rfind('.')]
+        sketch_path = path.join(path.dirname(filepath), f"{file_name}.k{args.k}.{args.sketch_type}_{args.size}.sketch")
+        sketch_paths[filepath] = sketch_path
+        print(filepath, sketch_path)
+
     # ------------------------- Sketch computing starts here -------------------------
 
     print("--- Compute sketches ---")
@@ -95,12 +103,19 @@ if __name__ == "__main__":
     # Compute sketches
     sketches = []
     for idx, filepath in enumerate(files_to_load):
-        print(f"loading {filepath}...")
-        streamer = KmerStreamer(filepath, args.k)
-        sketch = SketchType(kmer_streamer=streamer, name=path.basename(filepath))
-        sketches.append(sketch)
-        print(f"{idx+1}/{len(files_to_load)} files loaded.")
-
+        sketch_path = sketch_paths[filepath]
+        if not path.exists(sketch_path):
+            print(f"loading {filepath}...")
+            streamer = KmerStreamer(filepath, args.k)
+            sketch = SketchType(kmer_streamer=streamer, name=path.basename(filepath))
+            sketches.append(sketch)
+            sketch.save(sketch_path)
+            print(f"{idx+1}/{len(files_to_load)} sketch created.")
+        else:
+            sketch = SketchType(name=path.basename(filepath))
+            sketch.load(sketch_path)
+            sketches.append(sketch)
+            print(f"{idx+1}/{len(files_to_load)} sketch already present. Loaded from file")
     print("All sketches loaded.")
     print()
 
