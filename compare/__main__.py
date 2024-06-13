@@ -94,7 +94,6 @@ if __name__ == "__main__":
         file_name = file_name[:file_name.rfind('.')]
         sketch_path = path.join(path.dirname(filepath), f"{file_name}.k{args.k}.{args.sketch_type}_{args.size}.sketch")
         sketch_paths[filepath] = sketch_path
-        print(filepath, sketch_path)
 
     # ------------------------- Sketch computing starts here -------------------------
 
