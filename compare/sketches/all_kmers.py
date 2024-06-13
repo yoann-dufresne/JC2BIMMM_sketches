@@ -4,9 +4,9 @@ from compare.sketches.sketch import Sketch
 
 class AllKmers(Sketch):
 
-    def __init__(self, kmer_streamer=None, name="Unamed kmer list"):
+    def __init__(self, kmer_streamer=None, size=0, name="Unamed kmer list"):
         # Initiation of the super-class sketch
-        super().__init__(name=name)
+        super().__init__(size=size, name=name)
         # Init with kmers
         if kmer_streamer is not None:
             self.add_kmers(kmer_streamer)
