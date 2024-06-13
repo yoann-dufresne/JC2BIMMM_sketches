@@ -24,6 +24,7 @@ def parse_cmd():
     parser.add_argument('-k', type=int, required=True, help="kmer size.")
     parser.add_argument('-c', "--comparison-mode", choices=['pair', 'set'], default='pair', help="Exec mode can be 'pair' of 'set'. In 'pair' mode the software will compare 2 genomes in files pointed by the 2 positionnal argument of the command. In 'set' mode, all the genomes in a directory will be compared using sketches. The directory path must be the first positional argument. Default value is 'pair'.")
     parser.add_argument('-t', '--sketch-type', choices=['all', 'smin', 'parts', 'hyper'], default='all', help="Type of sketch to use for the comparison(s).")
+    parser.add_argument('-f', '--force-reconstruct', action='store_true', help="Force the reconstruction of the sketches")
     parser.add_argument('-x', '--xorshift', action='store_true', help="Activated the xorshift function to hash kmers.")
     parser.add_argument('-s', '--size', type=int, default=1024, help="Sketch size.")
     parser.add_argument('paths', nargs='+', help="path(s) to data. See mode for more details.")
@@ -88,6 +89,13 @@ if __name__ == "__main__":
     print(f"kmer size: {args.k}")
     print()
 
+    sketch_paths = {}
+    for filepath in files_to_load:
+        file_name = path.basename(filepath)
+        file_name = file_name[:file_name.rfind('.')]
+        sketch_path = path.join(path.dirname(filepath), f"{file_name}.k{args.k}.{args.sketch_type}_{args.size}.sketch")
+        sketch_paths[filepath] = sketch_path
+
     # ------------------------- Sketch computing starts here -------------------------
 
     print("--- Compute sketches ---")
@@ -95,12 +103,19 @@ if __name__ == "__main__":
     # Compute sketches
     sketches = []
     for idx, filepath in enumerate(files_to_load):
-        print(f"loading {filepath}...")
-        streamer = KmerStreamer(filepath, args.k, hash=args.xorshift)
-        sketch = SketchType(kmer_streamer=streamer, name=path.basename(filepath))
-        sketches.append(sketch)
-        print(f"{idx+1}/{len(files_to_load)} files loaded.")
-
+        sketch_path = sketch_paths[filepath]
+        if args.force_reconstruct or not path.exists(sketch_path):
+            print(f"loading {filepath}...")
+            streamer = KmerStreamer(filepath, args.k)
+            sketch = SketchType(kmer_streamer=streamer, name=path.basename(filepath))
+            sketches.append(sketch)
+            sketch.save(sketch_path)
+            print(f"{idx+1}/{len(files_to_load)} sketch created.")
+        else:
+            sketch = SketchType(name=path.basename(filepath))
+            sketch.load(sketch_path)
+            sketches.append(sketch)
+            print(f"{idx+1}/{len(files_to_load)} sketch already present. Loaded from save")
     print("All sketches loaded.")
     print()
 
