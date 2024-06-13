@@ -107,12 +107,12 @@ if __name__ == "__main__":
         if args.force_reconstruct or not path.exists(sketch_path):
             print(f"loading {filepath}...")
             streamer = KmerStreamer(filepath, args.k)
-            sketch = SketchType(kmer_streamer=streamer, name=path.basename(filepath))
+            sketch = SketchType(kmer_streamer=streamer, size=args.size, name=path.basename(filepath))
             sketches.append(sketch)
             sketch.save(sketch_path)
             print(f"{idx+1}/{len(files_to_load)} sketch created.")
         else:
-            sketch = SketchType(name=path.basename(filepath))
+            sketch = SketchType(name=path.basename(filepath), size=args.size)
             sketch.load(sketch_path)
             sketches.append(sketch)
             print(f"{idx+1}/{len(files_to_load)} sketch already present. Loaded from save")
