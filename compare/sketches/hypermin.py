@@ -2,20 +2,27 @@ from compare.sketches.sketch import Sketch
 
 
 
+
 class HyperMin(Sketch):
 
-    def __init__(self, kmer_streamer=None, name="Unamed kmer list"):
+    def __init__(self, kmer_streamer=None, size=0, name="Unamed kmer list"):
         # Initiation of the super-class sketch
         super().__init__(size=size, name=name)
 
-        # --- Complete here if needed ---
+        self.kmers = array('H', [65535 for _ in self.size])
 
         # Init with kmers
         if kmer_streamer is not None:
             self.add_kmers(kmer_streamer)
 
     def load(self, filename):
-        raise NotImplmentedError(f"Missing load method for {type(self)} class")
+        self.kmers = array('H', [65535 for _ in self.size])
+        with open(filename) as fp:
+            for idx, line in enumerate(fp):
+                if len(line) == 0:
+                    continue
+                val = int(line.strip())
+                self.kmers[idx] = val
 
     def add_kmers(self, kmer_streamer):
         # --- Complete here if needed ---
